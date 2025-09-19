@@ -21,72 +21,79 @@
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 仅开启按类名切换暗色模式 -->
     <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              brand: {
-                50: '#eff6ff',
-                100: '#dbeafe',
-                200: '#bfdbfe',
-                300: '#93c5fd',
-                400: '#60a5fa',
-                500: '#3b82f6',
-                600: '#2563eb',
-                700: '#1d4ed8',
-                800: '#1e40af',
-                900: '#1e3a8a',
-              }
-            }
-          }
-        }
-      }
+      tailwind.config = { darkMode: 'class' };
     </script>
   </head>
-  <body class="min-h-screen bg-gradient-to-b from-sky-50 to-white text-slate-800 antialiased">
-    <header class="relative overflow-hidden">
-      <div class="absolute inset-0 -z-10 blur-3xl" aria-hidden="true">
-        <div class="h-64 w-64 rounded-full bg-sky-200/60 animate-pulse absolute -top-8 -left-8"></div>
-        <div class="h-64 w-64 rounded-full bg-sky-300/50 animate-pulse absolute top-16 right-0"></div>
-      </div>
-
-      <div class="mx-auto max-w-5xl px-6 pt-12 pb-6">
-        <div class="flex items-center gap-4">
-          <div class="h-12 w-12 rounded-full bg-gradient-to-tr from-sky-400 to-cyan-500 grid place-items-center text-white font-bold">
-            刘
-          </div>
+  <body class="min-h-screen bg-slate-50 text-slate-800 antialiased font-sans leading-relaxed dark:bg-slate-950 dark:text-slate-200">
+    <header class="border-b bg-white/80 backdrop-blur dark:bg-slate-900/70">
+      <div class="mx-auto max-w-4xl px-5 py-5">
+        <div class="flex items-center justify-between gap-4">
           <div>
-            <h1 class="text-2xl sm:text-3xl font-bold tracking-tight">个人资源分享</h1>
-            <p class="text-sm text-slate-600">站主：<span class="font-medium">8.3 刘丰瑞</span></p>
+            <h1 class="text-2xl sm:text-3xl font-semibold"><a href="#top" class="hover:underline">个人资源分享</a></h1>
+            <p class="mt-1 text-sm text-slate-600 dark:text-slate-400">站主：<span class="font-medium">8.3 刘丰瑞</span></p>
+          </div>
+          <nav class="hidden sm:flex items-center gap-4 text-sm text-slate-700 dark:text-slate-300">
+            <a href="./index.html#resources" class="hover:underline">资源</a>
+            <a href="./about.html" class="hover:underline">关于</a>
+            <a href="./guide.html" class="hover:underline">安装指南</a>
+          </nav>
+          <div class="flex items-center gap-2">
+            <button id="btnTheme" class="inline-flex items-center gap-2 rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700" type="button" aria-label="切换主题">
+              <span class="hidden sm:inline">深/浅色</span>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-4 w-4" aria-hidden="true"><path d="M21.64 13a1 1 0 00-1.05-.14A8 8 0 1111.1 3.41 1 1 0 0013 2.36a10 10 0 108.64 10.64z"/></svg>
+            </button>
+            <button id="btnCopy" class="inline-flex items-center gap-2 rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700" type="button">
+              复制链接
+            </button>
+            <button id="btnQr" class="inline-flex items-center gap-2 rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700" type="button">
+              二维码
+            </button>
+            <a href="https://github.com/A452163789/A452163789.github.io/issues" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700">反馈</a>
           </div>
         </div>
       </div>
     </header>
 
-    <main class="mx-auto max-w-5xl px-6 pb-16">
+    <main class="mx-auto max-w-4xl px-5 pb-24 pt-6" id="top">
       <!-- Intro -->
       <section class="mb-8">
-        <div class="rounded-xl bg-white/70 backdrop-blur shadow-sm ring-1 ring-slate-900/5 p-6">
-          <p class="text-slate-700">
+        <div class="rounded-lg bg-white border border-slate-200 p-5 dark:bg-slate-900 dark:border-slate-800">
+          <p class="text-slate-700 dark:text-slate-300">
             欢迎来到我的个人资源分享博客。目前提供以下资源下载，后续会持续更新。若链接失效或需要帮助，请在 GitHub 上提交 issue 或联系站主。
           </p>
         </div>
       </section>
 
+      <!-- Resource Filters -->
+      <section class="mb-4" id="resources">
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+          <div class="flex-1">
+            <label class="sr-only" for="search">搜索</label>
+            <input id="search" type="search" placeholder="搜索资源（按标题、平台、类型）" class="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-500 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200" />
+          </div>
+          <div class="flex items-center gap-2 text-xs">
+            <button data-filter="all" class="tag-filter rounded-md border border-slate-300 px-2.5 py-1.5 hover:bg-slate-50 dark:border-slate-700 dark:hover:bg-slate-800">全部</button>
+            <button data-filter="android" class="tag-filter rounded-md border border-slate-300 px-2.5 py-1.5 hover:bg-slate-50 dark:border-slate-700 dark:hover:bg-slate-800">Android</button>
+            <button data-filter="apk" class="tag-filter rounded-md border border-slate-300 px-2.5 py-1.5 hover:bg-slate-50 dark:border-slate-700 dark:hover:bg-slate-800">APK</button>
+          </div>
+        </div>
+      </section>
+
       <!-- Resource Card -->
-      <section>
-        <div class="group rounded-2xl bg-white shadow-lg ring-1 ring-slate-900/5 overflow-hidden hover:shadow-xl transition-shadow">
-          <div class="p-6 sm:p-8">
-            <div class="flex items-start justify-between gap-4">
+      <section aria-label="资源列表">
+        <div class="resource-card rounded-lg bg-white border border-slate-200 hover:border-slate-300 transition-colors dark:bg-slate-900 dark:border-slate-800 dark:hover:border-slate-700" data-platform="android" data-type="apk" data-title="绿茶 app v1.0.1">
+          <div class="p-5 sm:p-6">
+            <div class="flex items-start justify-between gap-3">
               <div>
-                <h2 class="text-xl sm:text-2xl font-semibold tracking-tight">绿茶 APP v1.0.1</h2>
-                <p class="mt-1 text-slate-600">Android 安装包（APK）下载</p>
+                <h2 class="text-xl sm:text-2xl font-medium"><a class="hover:underline" href="./lvcha.html">绿茶 APP v1.0.1</a></h2>
+                <p class="mt-1 text-slate-600 dark:text-slate-400">Android 安装包（APK）下载</p>
               </div>
-              <span class="inline-flex items-center rounded-full bg-emerald-50 text-emerald-700 text-xs font-medium px-2.5 py-1 ring-1 ring-emerald-600/20">官方直链</span>
+              <span class="inline-flex items-center rounded-full bg-emerald-50 text-emerald-700 text-xs font-medium px-2 py-0.5 border border-emerald-200 dark:bg-emerald-900/20 dark:text-emerald-300 dark:border-emerald-800">官方直链</span>
             </div>
 
-            <ul class="mt-4 grid gap-2 text-sm text-slate-600">
+            <ul class="mt-4 grid gap-2 text-sm text-slate-600 dark:text-slate-400">
               <li class="flex items-center gap-2"><span class="text-slate-400">•</span> 文件类型：APK</li>
               <li class="flex items-center gap-2"><span class="text-slate-400">•</span> 适用平台：Android</li>
               <li class="flex items-center gap-2"><span class="text-slate-400">•</span> 版本：1.0.1</li>
@@ -95,19 +102,37 @@
             <div class="mt-6 flex flex-wrap items-center gap-3">
               <a
                 href="https://www.lvchaapp.vip/download/lvcha_101001.apk"
-                class="inline-flex items-center justify-center rounded-lg bg-sky-600 px-4 py-2.5 text-white font-medium shadow hover:bg-sky-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2"
+                id="btnDownload"
+                class="inline-flex items-center justify-center gap-2 rounded-md bg-slate-900 px-4 py-2 text-white text-sm font-medium hover:bg-slate-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-500 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-white/90"
                 download
               >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v7.586l2.293-2.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4A1 1 0 016.293 9.293L8.586 11.586V4a1 1 0 011-1z" clip-rule="evenodd" />
+                  <path d="M3 15a2 2 0 002 2h10a2 2 0 002-2v-1a1 1 0 112 0v1a4 4 0 01-4 4H5a4 4 0 01-4-4v-1a1 1 0 112 0v1z" />
+                </svg>
                 立即下载 APK
               </a>
               <a
                 href="https://www.lvchaapp.vip/download/lvcha_101001.apk"
-                class="text-sky-700 hover:text-sky-900 text-sm"
+                class="text-slate-700 hover:text-slate-900 text-sm underline underline-offset-4 dark:text-slate-300 dark:hover:text-white"
                 target="_blank" rel="noopener noreferrer"
               >
                 新窗口打开
               </a>
+              <a href="./guide.html" class="text-slate-700 hover:text-slate-900 text-sm underline underline-offset-4 dark:text-slate-300 dark:hover:text-white">安装指南</a>
+              <button id="btnQr2" class="text-slate-700 hover:text-slate-900 text-sm underline underline-offset-4 dark:text-slate-300 dark:hover:text-white" type="button">二维码下载</button>
+              <a href="./lvcha.html" class="text-slate-700 hover:text-slate-900 text-sm underline underline-offset-4 dark:text-slate-300 dark:hover:text-white">详情</a>
             </div>
+
+            <p class="mt-3 text-xs text-slate-500 dark:text-slate-400" id="dlInfo">已下载 <span id="dlCount">0</span> 次（本机统计）</p>
+
+            <details class="mt-4 text-sm open:rounded-b-lg">
+              <summary class="cursor-pointer select-none text-slate-700 dark:text-slate-300">更多信息</summary>
+              <div class="mt-2 text-slate-600 dark:text-slate-400">
+                <p>来源：官方发布页</p>
+                <p>提示：若下载缓慢，可右键复制链接后使用浏览器直接打开。</p>
+              </div>
+            </details>
 
             <p class="mt-4 text-xs text-slate-500">
               安全提示：下载来自互联网的 APK 时请注意安全，建议在系统提示允许时仅授信此来源并安装完成后关闭相关权限。
@@ -116,23 +141,161 @@
         </div>
       </section>
 
-      <!-- Future List Placeholder -->
-      <section class="mt-10">
-        <div class="rounded-xl border border-dashed border-slate-300/70 p-6 text-slate-500 text-sm">
-          更多资源即将到来……
-        </div>
-      </section>
+      
     </main>
 
-    <footer class="border-t bg-white/60 backdrop-blur">
-      <div class="mx-auto max-w-5xl px-6 py-6 text-sm text-slate-600 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+    <footer class="border-t bg-white/80 backdrop-blur dark:bg-slate-900/70">
+      <div class="mx-auto max-w-4xl px-5 py-6 text-sm text-slate-600 dark:text-slate-400 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
         <p>© <span id="year"></span> 个人资源分享 • 由 GitHub Pages 驱动</p>
         <p>站主：8.3 刘丰瑞</p>
       </div>
     </footer>
 
+    <!-- Toast -->
+    <div id="toast" class="fixed bottom-4 left-1/2 -translate-x-1/2 translate-y-6 opacity-0 pointer-events-none transition-all duration-300">
+      <div class="rounded-md bg-slate-900 text-white text-sm px-4 py-2 shadow-lg dark:bg-white dark:text-slate-900" role="status" aria-live="polite"></div>
+    </div>
+
+    <!-- QR Modal -->
+    <div id="qrModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/30 p-4">
+      <div class="w-full max-w-sm rounded-lg bg-white p-5 shadow-xl dark:bg-slate-900">
+        <div class="flex items-center justify-between mb-3">
+          <h4 class="font-medium">扫码下载</h4>
+          <button id="qrClose" class="text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-white">关闭</button>
+        </div>
+        <img id="qrImg" alt="下载二维码" class="mx-auto h-48 w-48 rounded bg-white p-2 border border-slate-200 dark:border-slate-800" />
+        <p class="mt-3 text-center text-xs text-slate-500 dark:text-slate-400">使用手机扫码打开下载链接</p>
+      </div>
+    </div>
+
+    
+
+    <!-- Back To Top -->
+    <button id="backTop" title="返回顶部" class="fixed bottom-5 right-5 z-40 hidden rounded-full bg-slate-900 text-white p-3 shadow-lg hover:bg-slate-700 dark:bg-white dark:text-slate-900 dark:hover:bg-white/90" type="button" aria-label="返回顶部">
+      ↑
+    </button>
+
     <script>
+      // 年份
       document.getElementById('year').textContent = new Date().getFullYear();
+
+      // 主题切换：使用 class 模式
+      const root = document.documentElement; // html 元素
+      const THEME_KEY = 'theme';
+      const saved = localStorage.getItem(THEME_KEY);
+      if (saved === 'dark') root.classList.add('dark');
+      if (saved === 'light') root.classList.remove('dark');
+
+      document.getElementById('btnTheme').addEventListener('click', () => {
+        const isDark = root.classList.toggle('dark');
+        localStorage.setItem(THEME_KEY, isDark ? 'dark' : 'light');
+        showToast(isDark ? '已切换至深色模式' : '已切换至浅色模式');
+      });
+
+      // 复制下载链接
+      const downloadUrl = 'https://www.lvchaapp.vip/download/lvcha_101001.apk';
+      document.getElementById('btnCopy').addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(downloadUrl);
+          showToast('下载链接已复制');
+        } catch (e) {
+          showToast('复制失败，请手动复制');
+        }
+      });
+
+      // 本机下载计数
+      const COUNT_KEY = 'apk_dl_count';
+      const dlCountEl = document.getElementById('dlCount');
+      const btnDownload = document.getElementById('btnDownload');
+      let count = parseInt(localStorage.getItem(COUNT_KEY) || '0', 10) || 0;
+      dlCountEl.textContent = count;
+      btnDownload.addEventListener('click', () => {
+        try {
+          count += 1;
+          localStorage.setItem(COUNT_KEY, String(count));
+          dlCountEl.textContent = count;
+          showToast('已记录下载');
+        } catch {}
+      });
+
+      // 搜索与过滤
+      const cards = Array.from(document.querySelectorAll('.resource-card'));
+      const searchInput = document.getElementById('search');
+      const tagButtons = Array.from(document.querySelectorAll('.tag-filter'));
+      let currentFilter = 'all';
+      function applyFilter() {
+        const q = (searchInput.value || '').trim().toLowerCase();
+        cards.forEach(card => {
+          const platform = card.dataset.platform || '';
+          const type = card.dataset.type || '';
+          const title = card.dataset.title || '';
+          const hitTag = currentFilter === 'all' || platform === currentFilter || type === currentFilter;
+          const hitText = !q || title.includes(q) || platform.includes(q) || type.includes(q);
+          card.classList.toggle('hidden', !(hitTag && hitText));
+        });
+      }
+      searchInput.addEventListener('input', applyFilter);
+      tagButtons.forEach(btn => btn.addEventListener('click', () => {
+        currentFilter = btn.dataset.filter;
+        tagButtons.forEach(b => b.classList.remove('bg-slate-900','text-white','dark:bg-slate-100','dark:text-slate-900'));
+        btn.classList.add('bg-slate-900','text-white','dark:bg-slate-100','dark:text-slate-900');
+        applyFilter();
+      }));
+      // 默认高亮“全部”
+      const allBtn = tagButtons.find(b => b.dataset.filter === 'all');
+      if (allBtn) allBtn.click();
+
+      // 二维码弹窗（使用在线生成服务）
+      const qrModal = document.getElementById('qrModal');
+      const qrImg = document.getElementById('qrImg');
+      const openQr = () => {
+        const url = encodeURIComponent(downloadUrl);
+        qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=${url}`;
+        qrModal.classList.remove('hidden');
+        qrModal.classList.add('flex');
+      };
+      document.getElementById('btnQr').addEventListener('click', openQr);
+      document.getElementById('btnQr2').addEventListener('click', openQr);
+      document.getElementById('qrClose').addEventListener('click', () => {
+        qrModal.classList.add('hidden');
+        qrModal.classList.remove('flex');
+      });
+      qrModal.addEventListener('click', (e) => { if (e.target === qrModal) document.getElementById('qrClose').click(); });
+
+      // 安装指南弹窗
+      const guideModal = document.getElementById('guideModal');
+      document.getElementById('btnInstall').addEventListener('click', () => {
+        guideModal.classList.remove('hidden');
+        guideModal.classList.add('flex');
+      });
+      document.getElementById('guideClose').addEventListener('click', () => {
+        guideModal.classList.add('hidden');
+        guideModal.classList.remove('flex');
+      });
+      guideModal.addEventListener('click', (e) => { if (e.target === guideModal) document.getElementById('guideClose').click(); });
+
+      // 返回顶部
+      const backTop = document.getElementById('backTop');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 200) backTop.classList.remove('hidden');
+        else backTop.classList.add('hidden');
+      });
+      backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+      // Toast
+      const toast = document.getElementById('toast');
+      const toastBox = toast.firstElementChild;
+      let hideTimer = null;
+      function showToast(message) {
+        toastBox.textContent = message;
+        toast.classList.remove('opacity-0', 'translate-y-6');
+        toast.classList.add('opacity-100', 'translate-y-0');
+        clearTimeout(hideTimer);
+        hideTimer = setTimeout(() => {
+          toast.classList.remove('opacity-100', 'translate-y-0');
+          toast.classList.add('opacity-0', 'translate-y-6');
+        }, 1800);
+      }
     </script>
   </body>
 </html>

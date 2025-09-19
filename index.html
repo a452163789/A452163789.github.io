@@ -35,9 +35,8 @@
             <p class="mt-1 text-sm text-slate-600 dark:text-slate-400">站主：<span class="font-medium">8.3 刘丰瑞</span></p>
           </div>
           <nav class="hidden sm:flex items-center gap-4 text-sm text-slate-700 dark:text-slate-300">
-            <a href="./index.html#resources" class="hover:underline">资源</a>
-            <a href="./about.html" class="hover:underline">关于</a>
-            <a href="./guide.html" class="hover:underline">安装指南</a>
+            <a href="#resources" class="hover:underline">资源</a>
+            <a href="#about" class="hover:underline">关于</a>
           </nav>
           <div class="flex items-center gap-2">
             <button id="btnTheme" class="inline-flex items-center gap-2 rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700" type="button" aria-label="切换主题">
@@ -87,7 +86,7 @@
           <div class="p-5 sm:p-6">
             <div class="flex items-start justify-between gap-3">
               <div>
-                <h2 class="text-xl sm:text-2xl font-medium"><a class="hover:underline" href="./lvcha.html">绿茶 APP v1.0.1</a></h2>
+                <h2 class="text-xl sm:text-2xl font-medium">绿茶 APP v1.0.1</h2>
                 <p class="mt-1 text-slate-600 dark:text-slate-400">Android 安装包（APK）下载</p>
               </div>
               <span class="inline-flex items-center rounded-full bg-emerald-50 text-emerald-700 text-xs font-medium px-2 py-0.5 border border-emerald-200 dark:bg-emerald-900/20 dark:text-emerald-300 dark:border-emerald-800">官方直链</span>
@@ -119,9 +118,8 @@
               >
                 新窗口打开
               </a>
-              <a href="./guide.html" class="text-slate-700 hover:text-slate-900 text-sm underline underline-offset-4 dark:text-slate-300 dark:hover:text-white">安装指南</a>
+              <button id="btnInstall" class="text-slate-700 hover:text-slate-900 text-sm underline underline-offset-4 dark:text-slate-300 dark:hover:text-white" type="button">安装指南</button>
               <button id="btnQr2" class="text-slate-700 hover:text-slate-900 text-sm underline underline-offset-4 dark:text-slate-300 dark:hover:text-white" type="button">二维码下载</button>
-              <a href="./lvcha.html" class="text-slate-700 hover:text-slate-900 text-sm underline underline-offset-4 dark:text-slate-300 dark:hover:text-white">详情</a>
             </div>
 
             <p class="mt-3 text-xs text-slate-500 dark:text-slate-400" id="dlInfo">已下载 <span id="dlCount">0</span> 次（本机统计）</p>
@@ -141,7 +139,13 @@
         </div>
       </section>
 
-      
+      <!-- About -->
+      <section id="about" class="mt-10">
+        <div class="rounded-lg bg-white border border-slate-200 p-5 dark:bg-slate-900 dark:border-slate-800">
+          <h3 class="text-base font-medium mb-2">关于本站</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-400">这里用于分享我个人收集或制作的资源，目前以 Android 安装包为主，后续会逐步增加更多类型。如果你有建议或遇到问题，欢迎点击右上角的“反馈”。</p>
+        </div>
+      </section>
     </main>
 
     <footer class="border-t bg-white/80 backdrop-blur dark:bg-slate-900/70">
@@ -168,7 +172,21 @@
       </div>
     </div>
 
-    
+    <!-- Guide Modal -->
+    <div id="guideModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/30 p-4">
+      <div class="w-full max-w-lg rounded-lg bg-white p-5 shadow-xl dark:bg-slate-900">
+        <div class="flex items-center justify-between mb-3">
+          <h4 class="font-medium">Android 安装指南</h4>
+          <button id="guideClose" class="text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-white">关闭</button>
+        </div>
+        <ol class="list-decimal pl-5 space-y-2 text-sm text-slate-700 dark:text-slate-300">
+          <li>下载 APK 文件后，若系统提示“来自未知来源”，请在设置中临时允许安装。</li>
+          <li>安装完成后，建议关闭“未知来源安装”权限。</li>
+          <li>首次启动如需权限（存储/通知等），请按需授予。</li>
+          <li>若安装失败或报毒，请从官网重新下载并校验文件。</li>
+        </ol>
+      </div>
+    </div>
 
     <!-- Back To Top -->
     <button id="backTop" title="返回顶部" class="fixed bottom-5 right-5 z-40 hidden rounded-full bg-slate-900 text-white p-3 shadow-lg hover:bg-slate-700 dark:bg-white dark:text-slate-900 dark:hover:bg-white/90" type="button" aria-label="返回顶部">

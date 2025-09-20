@@ -40,6 +40,9 @@ const resourceData: Resource = {
   ]
 }
 
+// 模块级常量，供 Toast 随机名字使用，避免 useEffect 依赖告警
+const NAMES = ['张三','李四','王五','赵六','刘七','小明','阿华','陈超','王敏']
+
 export default function HomePage() {
   const [downloadCount, setDownloadCount] = useState(resourceData.downloads)
   const [isDownloading, setIsDownloading] = useState(false)
@@ -47,7 +50,6 @@ export default function HomePage() {
   const [watchers, setWatchers] = useState(3287)
   const [progress, setProgress] = useState(76)
   const [toast, setToast] = useState('')
-  const names = ['张三','李四','王五','赵六','刘七','小明','阿华','陈超','王敏']
 
   useEffect(() => {
     const t = setInterval(() => setLeftSeconds((s) => (s > 0 ? s - 1 : 59 * 60 + 59)), 1000)
@@ -58,7 +60,7 @@ export default function HomePage() {
       return Math.round(next)
     }), 1500)
     const to = setInterval(() => {
-      const n = names[Math.floor(Math.random() * names.length)]
+      const n = NAMES[Math.floor(Math.random() * NAMES.length)]
       setToast(`${n} 刚刚0元拼成团`)
     }, 7000)
     return () => { clearInterval(t); clearInterval(w); clearInterval(p); clearInterval(to) }

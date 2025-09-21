@@ -45,8 +45,6 @@ jobs:
         run: npm ci
       
       - name: Build & Export with Next.js
-        env:
-          ASSET_PREFIX: https://cdn.jsdelivr.net/gh/a452163789/A452163789.github.io@assets
         run: npm run export
 
       - name: Checkout repository for CDN assets branch
@@ -56,6 +54,7 @@ jobs:
           path: assets-workdir
 
       - name: Publish CDN assets to 'assets' branch
+        id: publish_cdn_assets
         run: |
           set -e
           ls -la out/_next || true
@@ -69,6 +68,14 @@ jobs:
           git add -A
           git commit -m "chore: CDN assets from build ${GITHUB_SHA}" || echo "No changes to commit"
           git push origin assets
+          echo "sha=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+
+      - name: Rewrite HTML to use raw.githack CDN
+        run: |
+          set -e
+          CDN_PREFIX="https://rawcdn.githack.com/a452163789/A452163789.github.io/${{ steps.publish_cdn_assets.outputs.sha }}"
+          echo "Using CDN_PREFIX=$CDN_PREFIX"
+          find out -type f -name "*.html" -print0 | xargs -0 sed -i "s#/_next/#${CDN_PREFIX}/_next/#g"
       
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

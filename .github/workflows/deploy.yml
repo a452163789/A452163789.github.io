@@ -67,7 +67,7 @@ jobs:
           cp -R ../out/_next/static _next/static
           git add -A
           git commit -m "chore: CDN assets from build ${GITHUB_SHA}" || echo "No changes to commit"
-          git push origin assets
+          git push -f origin assets
           echo "sha=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
 
       - name: Rewrite HTML to use raw.githack CDN

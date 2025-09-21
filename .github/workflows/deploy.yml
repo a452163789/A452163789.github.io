@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -45,7 +45,30 @@ jobs:
         run: npm ci
       
       - name: Build & Export with Next.js
+        env:
+          ASSET_PREFIX: https://cdn.jsdelivr.net/gh/a452163789/A452163789.github.io@assets
         run: npm run export
+
+      - name: Checkout repository for CDN assets branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          path: assets-workdir
+
+      - name: Publish CDN assets to 'assets' branch
+        run: |
+          set -e
+          ls -la out/_next || true
+          cd assets-workdir
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B assets
+          rm -rf _next
+          mkdir -p _next
+          cp -R ../out/_next/static _next/static
+          git add -A
+          git commit -m "chore: CDN assets from build ${GITHUB_SHA}" || echo "No changes to commit"
+          git push origin assets
       
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

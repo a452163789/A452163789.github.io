@@ -5,8 +5,8 @@ const nextConfig = {
   images: {
     unoptimized: true
   },
-  // 用户/组织主页仓库（A452163789.github.io）部署到根路径，不需要 basePath/assetPrefix
-  assetPrefix: '',
+  // 支持通过环境变量注入 CDN 前缀（例如 jsDelivr），默认空
+  assetPrefix: process.env.ASSET_PREFIX || '',
   basePath: ''
 }
 

@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 
@@ -46,36 +46,6 @@ jobs:
       
       - name: Build & Export with Next.js
         run: npm run export
-
-      - name: Checkout repository for CDN assets branch
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          path: assets-workdir
-
-      - name: Publish CDN assets to 'assets' branch
-        id: publish_cdn_assets
-        run: |
-          set -e
-          ls -la out/_next || true
-          cd assets-workdir
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git checkout -B assets
-          rm -rf _next
-          mkdir -p _next
-          cp -R ../out/_next/static _next/static
-          git add -A
-          git commit -m "chore: CDN assets from build ${GITHUB_SHA}" || echo "No changes to commit"
-          git push -f origin assets
-          echo "sha=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
-
-      - name: Rewrite HTML to use raw.githack CDN
-        run: |
-          set -e
-          CDN_PREFIX="https://rawcdn.githack.com/a452163789/A452163789.github.io/${{ steps.publish_cdn_assets.outputs.sha }}"
-          echo "Using CDN_PREFIX=$CDN_PREFIX"
-          find out -type f -name "*.html" -print0 | xargs -0 sed -i "s#/_next/#${CDN_PREFIX}/_next/#g"
       
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
